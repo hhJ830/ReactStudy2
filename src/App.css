@@ -2,6 +2,37 @@
   text-align: center;
 }
 
+.main-bg{
+  height: 300px;
+  background-image: url('./bg.png');
+  background-size: cover;
+  background-position: center;
+
+}
+
+.img1{
+  height: 200px;
+  background-size: cover;
+  background-image: url('./shoes1.jpg');
+  background-position: center;
+
+}
+
+.img2{
+  height: 200px;
+  background-size: cover;
+  background-image: url('./shoes2.jpg');
+  background-position: center;
+
+}
+
+.img3{
+  height: 200px;
+  background-size: cover;
+  background-image: url('./shoes3.jpg');
+  background-position: center;
+
+}
 .container-style{
   display: flex;
   justify-content: center;
@@ -11,16 +42,11 @@
 
 .font{
   font-style: oblique;
+  font-weight: bold;
+ 
 }
 
-.navbar{
-  justify-content: center !important; /* 부트스트랩의 스타일을 덮어쓰기 */
 
-}
-.nav-style {
-
-  margin-right: 10rem;
-}
 
 .App-logo {
   height: 40vmin;
