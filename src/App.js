@@ -11,7 +11,7 @@ import data from './data.js';
 function App() {
 
   let [shoes] = useState(data);
-
+  let [image] = useState(["https://codingapple1.github.io/shop/shoes1.jpg", "https://codingapple1.github.io/shop/shoes2.jpg", "https://codingapple1.github.io/shop/shoes3.jpg", "https://codingapple1.github.io/shop/shoes1.jpg", "https://codingapple1.github.io/shop/shoes2.jpg", "https://codingapple1.github.io/shop/shoes3.jpg"])
   return (
     <div className="App">
       <Navbar bg="light" data-bs-theme="light">
@@ -41,25 +41,28 @@ function App() {
       <div className="main-bg"></div>
       <Container>
         <Row style={{ marginTop: '40px' }}>
-          <Col>
-            <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="80%"></img>
-            <h4>{ shoes[0].title }</h4>
-            <p>{ shoes[0].price }</p>
-          </Col>
-          <Col>
-            <img src="https://codingapple1.github.io/shop/shoes2.jpg" width="80%"></img>
-            <h4>{ shoes[1].title }</h4>
-            <p>{ shoes[1].price }</p>
-          </Col>
-          <Col>
-            <img src="https://codingapple1.github.io/shop/shoes3.jpg" width="80%"></img>
-            <h4>{ shoes[2].title }</h4>
-            <p>{ shoes[2].price }</p>
-          </Col>
+          {
+            image.map(function (a, i){
+              return <Item image = {image[i]} shoes = { shoes[i] }></Item>
+            })
+          }
         </Row>
       </Container>
     </div>
   );
+}
+
+function Item(props){
+  console.log(props.shoes)
+
+  return(
+    <Col>
+      <img src={ props.image } width="80%"></img>
+      <h4>{ props.shoes.title }</h4>
+      <p>{ props.shoes.price +"원"}</p>
+    </Col>
+  );
+
 }
 
 export default App;
