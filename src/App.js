@@ -9,9 +9,10 @@ import { Button, Navbar, Container, Row, Col, Nav } from 'react-bootstrap';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
+
 function App() {
 
-  let [shoes, setShoes] = useState(data);
+  let [shoes] = useState(data);
   let [image] = useState(["https://codingapple1.github.io/shop/shoes1.jpg", "https://codingapple1.github.io/shop/shoes2.jpg", "https://codingapple1.github.io/shop/shoes3.jpg", "https://codingapple1.github.io/shop/shoes1.jpg", "https://codingapple1.github.io/shop/shoes2.jpg", "https://codingapple1.github.io/shop/shoes3.jpg"])
   let navigate = useNavigate();
   
@@ -55,7 +56,6 @@ function App() {
                 }
               </Row>
             </Container>
-            <Button onClick={()=> setShoes(shoes.title.sort)}>정렬</Button>
 
           </div>
         } />
