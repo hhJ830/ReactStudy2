@@ -9,13 +9,14 @@ import { Button, Navbar, Container, Row, Col, Nav } from 'react-bootstrap';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
-
+import axios from 'axios';
 function App() {
 
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
+  let [count, setCount] = useState(2);
   let [image] = useState(["https://codingapple1.github.io/shop/shoes1.jpg", "https://codingapple1.github.io/shop/shoes2.jpg", "https://codingapple1.github.io/shop/shoes3.jpg", "https://codingapple1.github.io/shop/shoes1.jpg", "https://codingapple1.github.io/shop/shoes2.jpg", "https://codingapple1.github.io/shop/shoes3.jpg"])
   let navigate = useNavigate();
-  
+
   return (
     <div className="App">
       <Navbar bg="light" data-bs-theme="light">
@@ -50,16 +51,35 @@ function App() {
             <Container>
               <Row style={{ marginTop: '40px' }}>
                 {
-                  image.map(function (a, i) {
-                    return <Item image={image[i]} shoes={shoes[i]}></Item>
+                  shoes.map(function (a, i) {
+                    return <Item shoes={shoes[i]} i={i + 1}></Item>
                   })
                 }
               </Row>
             </Container>
 
+            <button onClick={() => {
+              setCount(count + 1);
+
+              axios.get('https://codingapple1.github.io/shop/data' + count + '.json')
+                .then((결과) => {
+                  let copy = [...shoes, ...결과.data];
+                  setShoes(copy);
+
+                })
+                .catch(() => {
+                  console.log('실패함')
+                })
+            }}>더보기</button>
+
+            {
+              count > 4 ? <div style = { {padding : '10px'}}>아쉽지만 더 없어요</div> : null
+            }
           </div>
         } />
-        <Route path="/detail/:id" element={<Detail shoes={shoes}/>} />
+
+
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
 
         <Route path="/about" element={<div>어바웃페이지임</div>} />
@@ -79,12 +99,9 @@ function App() {
 
 
 function Item(props) {
-  console.log(props.shoes)
-
   return (
-    <Col>
-
-      <img src={props.image} width="80%"></img>
+    <Col md={4}>
+      <img src={'https://codingapple1.github.io/shop/shoes' + props.i + '.jpg'} width="80%"></img>
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.price + "원"}</p>
 
