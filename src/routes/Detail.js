@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import styled from 'styled-components';
 import Nav from 'react-bootstrap/Nav';
 import { useState, useEffect } from 'react';
+import '../App.css';
 
 
 
@@ -34,6 +35,7 @@ function Detail(props) {
 
   let { id } = useParams();
   let 찾은상품 = props.shoes.find(function (x) {
+
     return x.id == id;
   });
 
@@ -41,8 +43,7 @@ function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
   let [입력값, 입력값변경] = useState(0);
-
-
+  let num = parseInt(id) + 1;
   return (
     <div className="container">
       
@@ -54,7 +55,7 @@ function Detail(props) {
      
       <div className="row">
         <div className="col-md-6">
-          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+          <img src={'https://codingapple1.github.io/shop/shoes'+ num +'.jpg'} width='100%'></img>
         </div>
         <div className="col-md-6">
           <h4 className="pt-5">{찾은상품.title}</h4>
@@ -91,14 +92,24 @@ function Detail(props) {
 }
 
 function TabContent(props) {
+
+  let [fade, setFade] = useState('')
+
+  useEffect(()=>{
+    setTimeout(()=>{ setFade('end')}, 100)
+    return () => {
+      setFade('')
+    }
+  }, [props.탭])
+
   if (props.탭 == 0) {
-    return <div>내용0</div>
+    return <div className={"start " + fade }>내용0</div>
   }
   else if (props.탭 == 1) {
-    return <div>내용1</div>
+    return <div className={`start ${fade}`}>내용1</div>
   }
   else {
-    return <div>내용2</div>
+    return <div className={"start " + fade}>내용2</div>
   }
 }
 

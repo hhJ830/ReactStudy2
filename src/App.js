@@ -14,8 +14,8 @@ function App() {
 
   let [shoes, setShoes] = useState(data);
   let [count, setCount] = useState(2);
+
   let [image] = useState(["https://codingapple1.github.io/shop/shoes1.jpg", "https://codingapple1.github.io/shop/shoes2.jpg", "https://codingapple1.github.io/shop/shoes3.jpg", "https://codingapple1.github.io/shop/shoes1.jpg", "https://codingapple1.github.io/shop/shoes2.jpg", "https://codingapple1.github.io/shop/shoes3.jpg"])
-  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -24,7 +24,7 @@ function App() {
           <Row>
             <Col>
               <Nav>
-                <Navbar.Brand href="#home" className='font' style={{ fontSize: 28 }}>NIKE</Navbar.Brand>
+                <Navbar.Brand href="/" className='font' style={{ fontSize: 28 }}>NIKE</Navbar.Brand>
               </Nav>
             </Col>
 
@@ -73,7 +73,7 @@ function App() {
             }}>더보기</button>
 
             {
-              count > 4 ? <div style = { {padding : '10px'}}>아쉽지만 더 없어요</div> : null
+              count > 4 ? <div style={{ padding: '10px' }}>아쉽지만 더 없어요</div> : null
             }
           </div>
         } />
@@ -99,12 +99,17 @@ function App() {
 
 
 function Item(props) {
+  let navigate = useNavigate();
+
   return (
     <Col md={4}>
-      <img src={'https://codingapple1.github.io/shop/shoes' + props.i + '.jpg'} width="80%"></img>
-      <h4>{props.shoes.title}</h4>
-      <p>{props.shoes.price + "원"}</p>
-
+      <div onClick={() => {
+        navigate(`/detail/${props.i - 1}`)
+      }}>
+        <img src={'https://codingapple1.github.io/shop/shoes' + props.i + '.jpg'} width="80%"></img>
+        <h4>{props.shoes.title}</h4>
+        <p>{props.shoes.price + "원"}</p>
+      </div>
     </Col>
   );
 }
